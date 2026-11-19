@@ -371,18 +371,6 @@
     @media (min-width: 761px) { footer { padding-bottom: 36px; } }
 
     /* ── BARRA FIXA MOBILE ──────────────────────────── */
-    .fixa {
-      position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: none;
-      background: rgba(15,17,19,.96); backdrop-filter: blur(10px); border-top: 1px solid var(--linha);
-      padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
-      align-items: center; gap: 12px; transform: translateY(110%); transition: transform .25s;
-    }
-    .fixa.visivel { transform: none; }
-    .fixa div { flex: 1; line-height: 1.25; }
-    .fixa b { display: block; font-size: 14px; }
-    .fixa span { font-size: 12px; color: var(--suave); }
-    .fixa .btn { padding: 13px 18px; font-size: 14.5px; box-shadow: none; }
-    @media (max-width: 760px) { .fixa { display: flex; } }
 
     /* ── ENTRADA SUAVE ──────────────────────────────── */
     .surge { opacity: 0; transform: translateY(18px); transition: opacity .6s, transform .6s; }
@@ -402,7 +390,7 @@
     .pos[hidden] { display: none; }
     .pos h3 { margin-bottom: 10px; }
     .pos p { margin-bottom: 18px; }
-  </style>
+      </style>
 </head>
 <body>
 
@@ -417,7 +405,7 @@
       <a href="#instrutor">Instrutor</a>
       <a href="#duvidas">Dúvidas</a>
     </nav>
-    <a href="#inscricao" class="btn btn-primario">Garantir vaga</a>
+    <a href="https://sites.google.com/view/workshoptetemann/in%C3%ADcio" target="_blank" rel="noopener" class="btn btn-primario">Garantir vaga</a>
   </div>
 </header>
 
@@ -449,7 +437,7 @@
       </div>
 
       <div class="hero-cta">
-        <a href="#inscricao" class="btn btn-primario">Quero garantir minha vaga
+        <a href="https://sites.google.com/view/workshoptetemann/in%C3%ADcio" target="_blank" rel="noopener" class="btn btn-primario">Quero garantir minha vaga
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
         <a href="#programacao" class="btn btn-linha">Ver a programação</a>
@@ -616,7 +604,7 @@
     </div>
 
     <div class="centro" style="margin-top:44px">
-      <a href="#inscricao" class="btn btn-primario">Quero participar da 2ª turma</a>
+      <a href="https://sites.google.com/view/workshoptetemann/in%C3%ADcio" target="_blank" rel="noopener" class="btn btn-primario">Quero participar da 2ª turma</a>
     </div>
   </div>
 </section>
@@ -678,7 +666,7 @@
         <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><div><small>Quando</small><b>Sábado, 19/12/2026 · 7h30 às 17h30</b></div></li>
         <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg><div><small>Endereço completo</small><b>Enviado pelo WhatsApp após a confirmação da inscrição</b></div></li>
       </ul>
-      <a href="#inscricao" class="btn btn-primario">Garantir minha vaga</a>
+      <a href="https://sites.google.com/view/workshoptetemann/in%C3%ADcio" target="_blank" rel="noopener" class="btn btn-primario">Garantir minha vaga</a>
     </div>
     <div class="foto surge"><img src="media/fachada-tetemann.jpg" alt="Fachada da Tetemann, oficina especializada em Honda, em Serra/ES" width="1000" height="1120" loading="lazy"/></div>
   </div>
@@ -740,7 +728,7 @@
       <div class="form surge">
         <h3>Faça sua inscrição</h3>
         <p>Preencha a ficha, assine o contrato e envie o comprovante de pagamento pelo WhatsApp. Leva menos de 3 minutos.</p>
-        <a href="inscricao.html" class="btn btn-wpp btn-bloco" id="abrirFicha">Preencher ficha de inscrição</a>
+        <a href="https://sites.google.com/view/workshoptetemann/in%C3%ADcio" target="_blank" rel="noopener" class="btn btn-wpp btn-bloco">Preencher ficha de inscrição</a>
       </div>
     </div>
   </div>
@@ -792,7 +780,7 @@
     <h2>Dia 19 de dezembro, <em>seu lugar é na bancada.</em></h2>
     <p class="lead">Um sábado para aprender com quem conserta CVT Honda todos os dias — e voltar para a oficina atendendo melhor e cobrando com segurança.</p>
     <div class="hero-cta">
-      <a href="#inscricao" class="btn btn-primario">Garantir minha vaga</a>
+      <a href="https://sites.google.com/view/workshoptetemann/in%C3%ADcio" target="_blank" rel="noopener" class="btn btn-primario">Garantir minha vaga</a>
       <a href="#" class="btn btn-linha js-wpp" target="_blank" rel="noopener">Tirar uma dúvida no WhatsApp</a>
     </div>
   </div>
@@ -811,10 +799,6 @@
 </footer>
 
 <!-- BARRA FIXA MOBILE -->
-<div class="fixa" id="fixa">
-  <div><b>Workshop CVT Honda · 19/12</b><span id="fixaInfo">Vagas limitadas</span></div>
-  <a href="#inscricao" class="btn btn-primario">Garantir vaga</a>
-</div>
 
 <script>
   // ══════════════════════════════════════════════════════════════
@@ -858,7 +842,6 @@
       valor.innerHTML = '<sup>R$</sup>' + inteiro + (centavos ? '<small>,' + centavos + '</small>' : '');
       pag.textContent = CONFIG.pagamento;
       faq.textContent = 'O investimento é de R$ ' + CONFIG.preco + ', em ' + CONFIG.pagamento.charAt(0).toLowerCase() + CONFIG.pagamento.slice(1) + '. Depois da inscrição, a equipe envia os dados pelo WhatsApp e sua vaga é confirmada após o pagamento.';
-      document.getElementById('fixaInfo').textContent = 'R$ ' + CONFIG.preco + ' · vagas limitadas';
     } else {
       valor.classList.add('consulta');
       valor.textContent = 'Consulte o valor';
@@ -919,11 +902,6 @@
     }, { threshold: 0.12 });
     document.querySelectorAll('.surge').forEach(function (el) { obs.observe(el); });
 
-    const fixa = document.getElementById('fixa');
-    let passouHero = false, naInscricao = false;
-    const atualiza = function () { fixa.classList.toggle('visivel', passouHero && !naInscricao); };
-    new IntersectionObserver(function (i) { passouHero = !i[0].isIntersecting; atualiza(); }).observe(document.querySelector('.hero'));
-    new IntersectionObserver(function (i) { naInscricao = i[0].isIntersecting; atualiza(); }, { threshold: 0.15 }).observe(document.getElementById('inscricao'));
   } else {
     document.querySelectorAll('.surge').forEach(function (el) { el.classList.add('ok'); });
   }
