@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Ficha de inscrição | Workshop CVT Honda 2ª Geração · Samuel Tetemann</title>
+<meta name="theme-color" content="#0F1113">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
+<style>
+:root {
+  --bg: #F4F4F3;
+  --surface: #FFFFFF;
+  --fg: #2C3033;
+  --muted: #5F666B;
+  --line: #D9DCDF;
+  --field: #FFFFFF;
+  --accent: #E4000F;
+  --accent-fg: #FFFFFF;
+  --err: #B00010;
+  --ok: #1E7B3A;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1B1E20;
+    --surface: #25292C;
+    --fg: #ECEEEF;
+    --muted: #A4ABB0;
+    --line: #3A3F43;
+    --field: #1F2326;
+    --accent: #FF3B47;
+    --accent-fg: #FFFFFF;
+    --err: #FF7A82;
+    --ok: #4CC26B;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1B1E20;
+  --surface: #25292C;
+  --fg: #ECEEEF;
+  --muted: #A4ABB0;
+  --line: #3A3F43;
+  --field: #1F2326;
+  --accent: #FF3B47;
+  --accent-fg: #FFFFFF;
+  --err: #FF7A82;
+  --ok: #4CC26B;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 15px/1.5 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 40px;
+}
+.wrap { max-width: 760px; margin: 0 auto; }
+.voltar { display: inline-block; margin: 0 0 16px; font-size: 14px; font-weight: 600; color: var(--muted); text-decoration: none; }
+.voltar:hover { color: var(--accent); }
+
+header .kicker {
+  font-size: 12px; font-weight: 800; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--accent); margin: 0 0 6px;
+}
+header h1 {
+  font-size: 1.6rem; font-weight: 800; line-height: 1.2;
+  margin: 0 0 8px; text-wrap: balance;
+}
+header p { margin: 0; color: var(--muted); }
+
+.card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 12px; padding: 20px; margin-top: 16px;
+}
+.card h2 { font-size: 1.05rem; font-weight: 800; margin: 0 0 4px; }
+.card .hint { margin: 0 0 14px; color: var(--muted); font-size: 14px; }
+.pag-opcao { border: 1px solid var(--line); border-radius: 10px; padding: 14px; margin-top: 12px; }
+.pag-opcao h3 { font-size: 1rem; font-weight: 800; margin: 0 0 8px; }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid .full { grid-column: 1 / -1; }
+.grid > * { min-width: 0; }
+@media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+
+label { display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
+input[type="text"], input[type="email"], input[type="tel"] {
+  width: 100%; box-sizing: border-box; font: inherit; font-size: 16px; color: var(--fg);
+  background: var(--field); border: 1px solid var(--line); border-radius: 8px;
+  padding: 10px 12px;
+}
+input:focus-visible, button:focus-visible, #sig:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
+
+.contrato { font-size: 14px; line-height: 1.6; overflow-wrap: anywhere; }
+.contrato .c-tit { font-size: 1rem; font-weight: 800; margin: 18px 0 8px; }
+.contrato h3 { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .03em; margin: 16px 0 4px; }
+.contrato p { margin: 0 0 8px; }
+.contrato .blank { border-bottom: 1px solid var(--muted); color: var(--muted); }
+.contrato .cidade { margin-top: 20px; }
+.assin { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 28px; }
+@media (max-width: 560px) { .assin { grid-template-columns: 1fr; } }
+.assin .bloco { min-width: 0; text-align: center; }
+.assin .sigimg { height: 70px; display: flex; align-items: flex-end; justify-content: center; }
+.assin .sigimg img { max-width: 100%; max-height: 70px; }
+.assin .linha { border-top: 1px solid var(--fg); padding-top: 6px; font-size: 13px; }
+
+#sig {
+  display: block; width: 100%; height: 180px; box-sizing: border-box;
+  background: #FFFFFF; border: 1px dashed var(--muted); border-radius: 8px;
+  touch-action: none; cursor: crosshair;
+}
+.sig-acoes { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 8px; }
+.sig-acoes small { color: var(--muted); }
+
+.check { display: flex; gap: 10px; align-items: flex-start; margin: 16px 0; }
+.check input { margin-top: 4px; width: 18px; height: 18px; accent-color: var(--accent); flex: none; }
+
+.btn {
+  font: inherit; font-weight: 800; border: 0; border-radius: 8px;
+  padding: 12px 18px; cursor: pointer; background: var(--accent); color: var(--accent-fg);
+}
+.btn.ghost { background: transparent; color: var(--fg); border: 1px solid var(--line); font-weight: 600; padding: 8px 12px; }
+.btn:disabled { opacity: .5; cursor: default; }
+.btn.block { width: 100%; box-sizing: border-box; display: block; text-align: center; text-decoration: none; margin-top: 10px; }
+.envio { margin-top: 16px; }
+.envio[hidden] { display: none; }
+
+.aviso { min-height: 1.4em; margin: 12px 0 0; font-weight: 600; color: var(--err); }
+.aviso.ok { color: var(--ok); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .card { transition: border-color .2s; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <a class="voltar" href="/#inscricao">&larr; Voltar ao site</a>
+  <header>
+    <p class="kicker">Workshop CVT Honda 2ª Geração</p>
+    <h1>Ficha de inscrição e contrato</h1>
+    <p>Preencha seus dados, leia o contrato com as suas informações, assine na caixa e baixe o contrato assinado para enviar ao Samuel.</p>
+  </header>
+
+  <section class="card" aria-labelledby="t-dados">
+    <h2 id="t-dados">1. Seus dados</h2>
+    <p class="hint">Esses dados entram no contrato. Confira antes de assinar.</p>
+    <div class="grid">
+      <div class="full">
+        <label for="f-nome">Nome completo</label>
+        <input type="text" id="f-nome" autocomplete="name">
+      </div>
+      <div>
+        <label for="f-cpf">CPF</label>
+        <input type="text" id="f-cpf" inputmode="numeric" placeholder="000.000.000-00">
+      </div>
+      <div>
+        <label for="f-telefone">Telefone (com DDD)</label>
+        <input type="tel" id="f-telefone" autocomplete="tel" placeholder="(27) 99999-9999">
+      </div>
+      <div>
+        <label for="f-email">E-mail</label>
+        <input type="email" id="f-email" autocomplete="email">
+      </div>
+      <div>
+        <label for="f-empresa">Empresa (oficina ou onde trabalha)</label>
+        <input type="text" id="f-empresa">
+      </div>
+      <div class="full">
+        <label for="f-endereco">Endereço completo</label>
+        <input type="text" id="f-endereco" autocomplete="street-address" placeholder="Rua, número, bairro, cidade">
+      </div>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="t-contrato">
+    <h2 id="t-contrato">2. Contrato</h2>
+    <p class="hint">O texto abaixo se atualiza com os seus dados.</p>
+    <article id="contrato" class="contrato"></article>
+  </section>
+
+  <section class="card" aria-labelledby="t-pix">
+    <h2 id="t-pix">Forma de pagamento</h2>
+    <p class="hint">Escolha uma das opções. Para confirmar a vaga, faça o pagamento integral do valor do curso.</p>
+    <p style="margin:0 0 14px"><b>Valor do curso:</b> R$ 1.397,00</p>
+
+    <div class="pag-opcao">
+      <h3>Opção 1: PIX</h3>
+      <p style="margin:0 0 6px"><b>Chave PIX (CPF):</b> <span id="pix-chave" style="font-size:1.15rem;font-weight:800">104.649.037-00</span></p>
+      <p style="margin:0 0 12px"><b>Em nome de:</b> Samuel Tetemann</p>
+      <button type="button" class="btn ghost" id="copiar-pix">Copiar chave PIX</button>
+    </div>
+
+    <div class="pag-opcao">
+      <h3>Opção 2: Cartão de crédito, por link de pagamento</h3>
+      <p class="hint" style="margin:0 0 10px">Parcelamento em até 3x sem juros. Fale com a equipe no WhatsApp para receber o link.</p>
+      <a class="btn block" href="https://wa.me/5527999334689?text=Ol%C3%A1%21%20Quero%20pagar%20minha%20inscri%C3%A7%C3%A3o%20no%20Workshop%20CVT%20Honda%202%C2%AA%20Gera%C3%A7%C3%A3o%20%2819/12/2026%29%20com%20cart%C3%A3o%2C%20pelo%20link%20de%20pagamento." target="_blank" rel="noopener">Entrar em contato no WhatsApp</a>
+      <p style="margin:8px 0 0;font-size:14px;color:var(--muted)">WhatsApp: (27) 99933-4689</p>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="t-assinatura">
+    <h2 id="t-assinatura">3. Assinatura</h2>
+    <p class="hint">Assine com o dedo ou com o mouse dentro da caixa.</p>
+    <canvas id="sig" aria-label="Área para assinatura"></canvas>
+    <div class="sig-acoes">
+      <small id="sig-estado">Nenhuma assinatura ainda.</small>
+      <button type="button" class="btn ghost" id="limpar">Limpar assinatura</button>
+    </div>
+
+    <label class="check" for="aceite">
+      <input type="checkbox" id="aceite">
+      <span>Li e compreendi todas as cláusulas deste contrato e concordo com os seus termos.</span>
+    </label>
+
+    <button type="button" class="btn block" id="assinar">Assinar e baixar o contrato</button>
+    <p class="aviso" id="aviso" role="status" aria-live="polite"></p>
+
+  <div id="passo-envio" class="envio" hidden>
+    <p class="hint">Último passo: envie o contrato e os seus dados para a equipe.</p>
+    <a class="btn block" id="enviar-whatsapp" href="#" target="_blank" rel="noopener">Enviar pelo WhatsApp</a>
+    <a class="btn ghost block" id="baixar-contrato" href="#" download="contrato.html">Baixar o contrato assinado</a>
+  </div>
+  </section>
+</div>
+
+<script>
+// Dados fixos do contrato. Se o valor, a data ou o local mudarem, altere aqui.
+const CONFIG = {
+  contratadaNome: 'Samuel Tetemann',
+  contratadaCpf: '104.649.037-00',
+  contratadaEmpresa: 'Tetemann Centro de Revisões',
+  contratadaEndereco: 'Rua Bicuíba, nº 237, Colina de Laranjeiras',
+  data: '19 de dezembro de 2026 (sábado)',
+  horario: 'das 07h30min às 17h30min',
+  valorTotal: 'R$ 1.397,00 (mil trezentos e noventa e sete reais)',
+  whatsapp: '5527999334689',
+  pixChave: '104.649.037-00',
+  pixNome: 'Samuel Tetemann',
+  cidade: 'Serra - ES'
+};
+
+const IDS = { nome: 'f-nome', cpf: 'f-cpf', telefone: 'f-telefone', email: 'f-email', empresa: 'f-empresa', endereco: 'f-endereco' };
+
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+}
+
+function lerDados() {
+  const d = {};
+  for (const k in IDS) d[k] = document.getElementById(IDS[k]).value.trim();
+  return d;
+}
+
+function contratoHTML(d, sigUrl) {
+  const v = x => x ? esc(x) : '<span class="blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+  const hoje = new Date().toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+  const cl = (titulo, ...ps) => '<h3>' + titulo + '</h3>' + ps.map(p => '<p>' + p + '</p>').join('');
+  const C = CONFIG;
+  return `
+    <p><b>CONTRATADA (Ministrante)</b><br>Nome: ${esc(C.contratadaNome)}<br>CPF: ${esc(C.contratadaCpf)}<br>Empresa: ${esc(C.contratadaEmpresa)}<br>Endereço: ${esc(C.contratadaEndereco)}</p>
+    <p><b>CONTRATANTE (Aluno/Participante)</b><br>Nome: ${v(d.nome)}<br>CPF: ${v(d.cpf)}<br>Empresa: ${v(d.empresa)}<br>E-mail: ${v(d.email)}<br>Endereço: ${v(d.endereco)}<br>Telefone: ${v(d.telefone)}</p>
+
+    <h3>Cláusula 1. Do objeto</h3>
+    <p>A CONTRATADA se compromete a ministrar treinamento teórico e prático sobre Câmbio Automático CVT 2ª Geração Honda (Continuously Variable Transmission), abrangendo diagnóstico, funcionamento, manutenção e revisão desta modalidade de transmissão, com foco específico nos modelos Honda equipados com esta tecnologia.</p>
+
+    <h3>Cláusula 2. Da data, local e horário</h3>
+    <p>O treinamento será realizado em ${esc(C.data)}, ${esc(C.horario)}, nas dependências da Tetemann Centro de Revisões, situada à Rua Bicuíba, nº 237, Colina de Laranjeiras.</p>
+
+    <h3>Cláusula 3. Do valor e forma de pagamento</h3>
+    <p>O CONTRATANTE pagará à CONTRATADA o valor total de ${esc(C.valorTotal)} pelo treinamento, pago em até 3 (três) parcelas sem juros.</p>
+
+    <h3>Cláusula 4. Das formas de pagamento aceitas</h3>
+    <p>São aceitas as seguintes formas de pagamento: (a) PIX, chave ${esc(C.pixChave)} (em nome de ${esc(C.pixNome)}); (b) cartão de crédito, por link de pagamento solicitado à CONTRATADA pelo WhatsApp, em até 3 (três) parcelas sem juros.</p>
+
+    <h3>Cláusula 5. Das obrigações da CONTRATADA</h3>
+    <p>Compete à CONTRATADA: (a) ministrar o conteúdo com qualidade e pontualidade; (b) fornecer o material didático utilizado durante o treinamento; (c) disponibilizar certificado de participação ao CONTRATANTE ao término do curso.</p>
+
+    <h3>Cláusula 6. Das obrigações do CONTRATANTE</h3>
+    <p>Compete ao CONTRATANTE: (a) efetuar o pagamento na forma e prazos acordados; (b) comparecer ao treinamento no horário estabelecido; (c) respeitar as normas internas do local de realização do treinamento.</p>
+
+    <h3>Cláusula 7. Da confidencialidade e restrição de uso comercial do conteúdo</h3>
+    <p>O CONTRATANTE reconhece que todo o conteúdo didático, técnico e metodológico disponibilizado durante o treinamento, incluindo, mas não se limitando a materiais impressos, apresentações, vídeos, demonstrações práticas e informações técnicas, constitui propriedade intelectual da CONTRATADA.</p>
+    <p>Parágrafo único: É expressamente vedado ao CONTRATANTE, pelo prazo de 18 (dezoito) meses contados da data de realização do treinamento, reproduzir, distribuir, ministrar, comercializar ou de qualquer forma explorar economicamente o conteúdo aprendido, seja de forma total ou parcial, diretamente ou por interposta pessoa, sob pena de responder por perdas e danos, incluindo lucros cessantes e danos emergentes, além de estar sujeito às sanções previstas na Lei nº 9.610/1998 (Lei de Direitos Autorais).</p>
+
+    <h3>Cláusula 8. Do cancelamento</h3>
+    <p>Em caso de cancelamento por parte do CONTRATANTE, não haverá devolução de qualquer valor já pago, independentemente do prazo de antecedência, tendo em vista que os custos com materiais individuais são incorridos previamente à realização do treinamento. O cancelamento por parte da CONTRATADA implicará na devolução integral do valor pago ou na remarcação do treinamento, a critério do CONTRATANTE.</p>
+
+    <h3>Cláusula 9. Do foro</h3>
+    <p>As partes elegem o foro da Comarca do domicílio da CONTRATADA para dirimir quaisquer controvérsias decorrentes deste contrato, renunciando a qualquer outro por mais privilegiado que seja.</p>
+
+    <h3>Cláusula 10. Do uso de imagem</h3>
+    <p>O CONTRATANTE, ao assinar o presente contrato, autoriza expressamente a CONTRATADA e a Tetemann Centro de Revisões a capturar, reproduzir, editar e divulgar sua imagem e voz, incluindo fotografias, vídeos e gravações realizadas durante o treinamento, para fins de divulgação institucional, marketing, redes sociais, material didático e quaisquer outras ações de comunicação relacionadas ao evento, sem limitação de prazo ou território, sem que isso implique qualquer ônus ou remuneração ao CONTRATANTE.</p>
+
+    <h3>Cláusula 11. Da assinatura</h3>
+    <p>As partes declaram ter lido e compreendido todas as cláusulas deste contrato, concordando com os seus termos, e o assinam em duas vias de igual teor e forma.</p>
+
+    <p class="cidade">${esc(C.cidade)}, ${hoje}.</p>
+
+    <div class="assin">
+      <div class="bloco">
+        <div class="sigimg"></div>
+        <div class="linha"><b>${esc(C.contratadaNome)}</b><br>Tetemann Centro de Revisões<br>CONTRATADA</div>
+      </div>
+      <div class="bloco">
+        <div class="sigimg">${sigUrl ? '<img src="' + sigUrl + '" alt="Assinatura do CONTRATANTE">' : ''}</div>
+        <div class="linha"><b>${v(d.nome)}</b><br>${v(d.empresa)}<br>CONTRATANTE</div>
+      </div>
+    </div>`;
+}
+
+// ---------- assinatura ----------
+const canvas = document.getElementById('sig');
+const ctx = canvas.getContext('2d');
+let temAssinatura = false;
+let sigUrl = null;
+let desenhando = false;
+let ultimo = null;
+
+function ajustarCanvas() {
+  const r = canvas.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = Math.round(r.width * dpr);
+  canvas.height = Math.round(r.height * dpr);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.lineWidth = 2.2;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  ctx.strokeStyle = '#111111';
+}
+
+function posicao(e) {
+  const r = canvas.getBoundingClientRect();
+  return { x: e.clientX - r.left, y: e.clientY - r.top };
+}
+
+canvas.addEventListener('pointerdown', e => {
+  desenhando = true;
+  canvas.setPointerCapture(e.pointerId);
+  ultimo = posicao(e);
+  ctx.beginPath();
+  ctx.arc(ultimo.x, ultimo.y, 1, 0, Math.PI * 2);
+  ctx.fillStyle = '#111111';
+  ctx.fill();
+  temAssinatura = true;
+});
+
+canvas.addEventListener('pointermove', e => {
+  if (!desenhando) return;
+  const p = posicao(e);
+  ctx.beginPath();
+  ctx.moveTo(ultimo.x, ultimo.y);
+  ctx.lineTo(p.x, p.y);
+  ctx.stroke();
+  ultimo = p;
+});
+
+function terminarTraco() {
+  if (!desenhando) return;
+  desenhando = false;
+  sigUrl = temAssinatura ? canvas.toDataURL('image/png') : null;
+  document.getElementById('sig-estado').textContent = temAssinatura ? 'Assinatura registrada.' : 'Nenhuma assinatura ainda.';
+  renderContrato();
+}
+canvas.addEventListener('pointerup', terminarTraco);
+canvas.addEventListener('pointercancel', terminarTraco);
+
+document.getElementById('limpar').addEventListener('click', () => {
+  const r = canvas.getBoundingClientRect();
+  ctx.clearRect(0, 0, r.width, r.height);
+  temAssinatura = false;
+  sigUrl = null;
+  document.getElementById('sig-estado').textContent = 'Nenhuma assinatura ainda.';
+  renderContrato();
+});
+
+window.addEventListener('resize', () => {
+  // Redimensionar o canvas limpa o desenho; a assinatura é refeita se preciso.
+  const tinha = temAssinatura;
+  ajustarCanvas();
+  if (tinha) {
+    temAssinatura = false;
+    sigUrl = null;
+    document.getElementById('sig-estado').textContent = 'A janela mudou de tamanho. Assine de novo.';
+    renderContrato();
+  }
+});
+
+// ---------- contrato ao vivo ----------
+function renderContrato() {
+  document.getElementById('contrato').innerHTML = contratoHTML(lerDados(), sigUrl);
+}
+for (const k in IDS) document.getElementById(IDS[k]).addEventListener('input', renderContrato);
+
+// ---------- salvar ----------
+function slug(s) {
+  return String(s || 'participante').normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'participante';
+}
+
+function documentoHTML(d, sig) {
+  return '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">' +
+    '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+    '<title>Contrato CVT assinado - ' + esc(d.nome) + '</title><style>' +
+    'body{font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff;max-width:720px;margin:32px auto;padding:0 20px;line-height:1.55;font-size:14px}' +
+    'h1{font-size:18px;text-align:center;margin:0}.sub{text-align:center;font-weight:bold;margin:4px 0 24px}' +
+    'h3{font-size:13px;text-transform:uppercase;margin:16px 0 4px}p{margin:0 0 8px}' +
+    '.blank{border-bottom:1px solid #666}.cidade{margin-top:20px}' +
+    '.assin{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px}' +
+    '.bloco{text-align:center}.sigimg{height:70px;display:flex;align-items:flex-end;justify-content:center}' +
+    '.sigimg img{max-width:100%;max-height:70px}.linha{border-top:1px solid #000;padding-top:6px;font-size:13px}' +
+    '</style></head><body>' +
+    '<h1>CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE TREINAMENTO</h1>' +
+    '<div class="sub">CÂMBIO AUTOMÁTICO CVT 2ª GERAÇÃO HONDA</div>' +
+    contratoHTML(d, sig) +
+    '</body></html>';
+}
+
+const avisoEl = document.getElementById('aviso');
+function aviso(msg, ok) {
+  avisoEl.textContent = msg;
+  avisoEl.classList.toggle('ok', !!ok);
+}
+
+document.getElementById('assinar').addEventListener('click', async () => {
+  const d = lerDados();
+  const faltam = [];
+  if (!d.nome) faltam.push('nome completo');
+  if (!d.cpf) faltam.push('CPF');
+  if (!d.telefone) faltam.push('telefone');
+  if (!d.email) faltam.push('e-mail');
+  if (!d.endereco) faltam.push('endereço');
+  if (!document.getElementById('aceite').checked) faltam.push('aceite das cláusulas');
+  if (!temAssinatura || !sigUrl) faltam.push('assinatura');
+  if (faltam.length) {
+    aviso('Falta preencher: ' + faltam.join(', ') + '.');
+    return;
+  }
+
+  const html = documentoHTML(d, sigUrl);
+  const nomeArquivo = 'contrato-cvt-' + slug(d.nome) + '.html';
+  const linkArquivo = document.getElementById('baixar-contrato');
+  if (linkArquivo.href.indexOf('blob:') === 0) URL.revokeObjectURL(linkArquivo.href);
+  linkArquivo.href = URL.createObjectURL(new Blob([html], { type: 'text/html;charset=utf-8' }));
+  linkArquivo.download = nomeArquivo;
+
+  const linhas = [
+    'Olá! Quero garantir minha vaga no *Workshop CVT Honda 2ª Geração* (19/12/2026).',
+    '',
+    '*Nome:* ' + d.nome,
+    '*CPF:* ' + d.cpf,
+    '*Telefone:* ' + d.telefone,
+    '*E-mail:* ' + d.email,
+    '*Empresa:* ' + (d.empresa || '-'),
+    '*Endereço:* ' + d.endereco,
+    '',
+    'Segue o comprovante de pagamento. O contrato assinado (' + nomeArquivo + ') também vai em anexo.'
+  ];
+  document.getElementById('enviar-whatsapp').href =
+    'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(linhas.join('\n'));
+  document.getElementById('passo-envio').hidden = false;
+  aviso('Contrato assinado. Baixe o arquivo e envie pelo WhatsApp.', true);
+  linkArquivo.click();
+  window.open(document.getElementById('enviar-whatsapp').href, '_blank', 'noopener');
+});
+
+document.getElementById('copiar-pix').addEventListener('click', async () => {
+  const botao = document.getElementById('copiar-pix');
+  try {
+    await navigator.clipboard.writeText('10464903700');
+    botao.textContent = 'Chave copiada';
+  } catch (e) {
+    const r = document.createRange();
+    r.selectNodeContents(document.getElementById('pix-chave'));
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(r);
+    botao.textContent = 'Chave selecionada, copie manualmente';
+  }
+});
+
+ajustarCanvas();
+renderContrato();
+</script>
+</body>
+</html>
