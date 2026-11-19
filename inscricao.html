@@ -393,8 +393,13 @@ document.getElementById('limpar').addEventListener('click', () => {
   renderContrato();
 });
 
+let larguraCanvas = 0;
 window.addEventListener('resize', () => {
-  // Redimensionar o canvas limpa o desenho; a assinatura é refeita se preciso.
+  // No celular a barra de endereço some ao rolar e dispara 'resize' só na altura:
+  // nesse caso não mexe na assinatura.
+  const largura = Math.round(canvas.getBoundingClientRect().width);
+  if (largura === larguraCanvas) return;
+  larguraCanvas = largura;
   const tinha = temAssinatura;
   ajustarCanvas();
   if (tinha) {
@@ -471,14 +476,19 @@ document.getElementById('f-cpf').addEventListener('input', e => { e.target.value
 document.getElementById('f-telefone').addEventListener('input', e => { e.target.value = mascaraTelefone(e.target.value); renderContrato(); });
 
 // ---------- envio para a planilha ----------
-function enviarParaPlanilha(d, html) {
+function enviarParaPlanilha(d) {
   if (!CONFIG.planilhaUrl) return Promise.resolve({ ok: false, erro: 'planilha não configurada' });
+  const ctrl = 'AbortController' in window ? new AbortController() : null;
+  const limite = setTimeout(() => ctrl && ctrl.abort(), 45000);
   return fetch(CONFIG.planilhaUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify({ dados: d, assinatura: sigUrl })
-  }).then(r => r.json()).catch(e => ({ ok: false, erro: String(e) }));
+    body: JSON.stringify({ dados: d, assinatura: sigUrl }),
+    signal: ctrl ? ctrl.signal : undefined
+  }).then(r => r.json()).catch(e => ({ ok: false, erro: String(e) }))
+    .finally(() => clearTimeout(limite));
 }
+let inscricaoRegistrada = false;
 
 const avisoEl = document.getElementById('aviso');
 function aviso(msg, ok) {
@@ -516,8 +526,6 @@ document.getElementById('assinar').addEventListener('click', async () => {
 
   const html = documentoHTML(d, sigUrl);
   const botaoAssinar = document.getElementById('assinar');
-  botaoAssinar.disabled = true;
-  const registro = enviarParaPlanilha(d, html);
   const nomeArquivo = 'contrato-cvt-' + slug(d.nome) + '.html';
   const linkArquivo = document.getElementById('baixar-contrato');
   if (linkArquivo.href.indexOf('blob:') === 0) URL.revokeObjectURL(linkArquivo.href);
@@ -538,15 +546,25 @@ document.getElementById('assinar').addEventListener('click', async () => {
   ];
   document.getElementById('enviar-whatsapp').href =
     'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(linhas.join('\n'));
+  // Primeiro registra na planilha e só depois mostra os botões. No celular,
+  // abrir o WhatsApp ou baixar o arquivo antes disso interrompia o envio.
+  if (!inscricaoRegistrada) {
+    botaoAssinar.disabled = true;
+    botaoAssinar.textContent = 'Enviando sua inscrição...';
+    aviso('Enviando sua inscrição, aguarde alguns segundos...', true);
+    const r = await enviarParaPlanilha(d);
+    if (!r.ok) {
+      botaoAssinar.disabled = false;
+      botaoAssinar.textContent = 'Tentar enviar de novo';
+      aviso('Não conseguimos registrar sua inscrição agora. Confira sua internet e toque em "Tentar enviar de novo".');
+      return;
+    }
+    inscricaoRegistrada = true;
+    botaoAssinar.textContent = 'Inscrição enviada';
+  }
   document.getElementById('passo-envio').hidden = false;
-  aviso('Contrato assinado. Registrando sua inscrição...', true);
-  linkArquivo.click();
-  window.open(document.getElementById('enviar-whatsapp').href, '_blank', 'noopener');
-
-  const r = await registro;
-  botaoAssinar.disabled = false;
-  if (r.ok) aviso('Inscrição registrada e contrato assinado. Envie o comprovante pelo WhatsApp.', true);
-  else aviso('Contrato assinado. Envie o contrato baixado e o comprovante pelo WhatsApp para concluir.', true);
+  aviso('Inscrição registrada e contrato assinado! Agora envie o comprovante de pagamento pelo WhatsApp.', true);
+  document.getElementById('passo-envio').scrollIntoView({ behavior: 'smooth', block: 'center' });
 });
 
 document.getElementById('copiar-pix').addEventListener('click', async () => {
@@ -565,6 +583,7 @@ document.getElementById('copiar-pix').addEventListener('click', async () => {
 });
 
 ajustarCanvas();
+larguraCanvas = Math.round(canvas.getBoundingClientRect().width);
 renderContrato();
 </script>
 </body>
